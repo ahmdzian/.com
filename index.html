@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ahmdzian photography</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --bg-dark: #0f172a;
+      --text-light: #e0f2fe;
+      --accent: #60a5fa;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+
+    .logo span {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      background: url('1000077003.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: var(--text-light);
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .about p {
+      text-align: center;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.9);
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 16px;
+      color: var(--text-light);
+      border-top: 1px solid var(--primary);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .hero p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="70a85d83-15b2-4817-a3ba-63cab3b9451f.jpg" alt="Foto Profil" />
+      <span>ahmdzian photography</span>
+    </div>
+    <nav>
+      <a href="#about">Tentang</a>
+      <a href="#gallery">Galeri</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>ahmdzian photography</h1>
+    <p>menerima segala event foto ataupun videografi</p>
+  </section>
+
+  <section id="about" class="about">
+    <h2>Tentang Kami</h2>
+    <p>
+      Kami adalah penyedia layanan fotografi dan videografi yang berdedikasi untuk mengabadikan momen-momen berharga Anda. Dengan pengalaman dan peralatan terbaik, kami siap menghadirkan hasil yang memuaskan untuk setiap acara Anda.
+    </p>
+  </section>
+
+  <section id="gallery">
+    <h2>Galeri</h2>
+    <div class="gallery">
+            <!-- Foto baru -->
+      <img src="IMG-20250515-WA0040.jpg" alt="Foto Kegiatan 1" />
+      <img src="IMG-20250515-WA0042.jpg" alt="Foto Kegiatan 2" />
+      <img src="IMG-20250515-WA0041.jpg" alt="Foto Kegiatan 3" />
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>
+      <a href="mailto:ziankauman@gmail.com">ziankauman@gmail.com</a> |
+      <a href="https://instagram.com/_ahmdzian" target="_blank">@_ahmdzian</a>
+    </p>
+  </footer>
+
+</body>
+</html>
