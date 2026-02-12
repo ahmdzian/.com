@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ahmdzian photography - Login & Gallery</title>
+<title>ahmdzian photography</title>
 
 <style>
 :root {
@@ -13,186 +13,254 @@
   --accent: #60a5fa;
 }
 
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: var(--bg-dark);
   color: var(--text-light);
 }
 
-.container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 40px 20px;
+.hidden { display: none; }
+
+/* LOGIN */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h2 {
+.auth-box {
+  background: #111827;
+  padding: 30px;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(59,130,246,0.3);
+}
+
+.auth-box h2 {
   text-align: center;
   color: var(--primary);
 }
 
-.section {
-  margin-bottom: 60px;
-  background: rgba(0,0,0,0.8);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(59,130,246,0.4);
-}
-
-input {
+.auth-box input {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
+  margin: 8px 0;
   border: none;
-  outline: none;
+  border-radius: 5px;
 }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
+.auth-box button {
+  width: 100%;
+  padding: 10px;
   background: var(--primary);
+  border: none;
   color: white;
-  cursor: pointer;
   font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-button:hover {
+.auth-box button:hover {
   background: var(--accent);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #1e293b;
+.switch {
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
   font-size: 14px;
+  color: var(--accent);
 }
 
-th {
-  background: #1e293b;
+/* PORTFOLIO */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+nav a {
+  color: var(--text-light);
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+nav a:hover { color: var(--accent); }
+
+.hero {
+  background: url('1000077003.jpg') no-repeat center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3em;
   color: var(--primary);
 }
 
-tr:hover {
-  background: #1e293b;
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
-.delete-btn {
-  background: crimson;
-}
-
-.delete-btn:hover {
-  background: darkred;
-}
-
-/* GALLERY */
 .gallery {
-  margin-top: 20px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 20px;
 }
 
 .gallery img {
   width: 100%;
-  max-width: 700px;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(59,130,246,0.4);
-  transition: 0.3s ease;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
 .gallery img:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+}
+
+.logout-btn {
+  background: red;
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-  <!-- LOGIN -->
-  <div class="section">
-    <h2>Login Pengguna</h2>
-    <form onsubmit="saveUser(event)">
-      <input type="email" id="email" placeholder="Masukkan email" required>
-      <input type="password" placeholder="Masukkan password" required>
-      <button type="submit">Login</button>
-    </form>
+<!-- LOGIN PAGE -->
+<div id="authPage" class="auth-container">
+  <div class="auth-box">
+    <h2 id="formTitle">Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submitAuth()">Masuk</button>
+    <div class="switch" onclick="toggleForm()">Belum punya akun? Daftar</div>
   </div>
+</div>
 
-  <!-- DATA USER -->
-  <div class="section">
-    <h2>Daftar Pengguna Terdaftar</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Email</th>
-          <th>Waktu Login</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody id="userTable"></tbody>
-    </table>
-  </div>
+<!-- PORTFOLIO PAGE -->
+<div id="portfolioPage" class="hidden">
 
-  <!-- FOTO TAMBAHAN -->
-  <div class="section">
-    <h2>Portfolio Highlight</h2>
-    <div class="gallery">
-      <img src="wedding.jpg" alt="Wedding Rasyl Miftah">
-    </div>
+<header>
+  <div><strong>ahmdzian photography</strong></div>
+  <nav>
+    <a href="#about">Tentang</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#paket">Paket</a>
+    <a href="#contact">Kontak</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>ahmdzian photography</h1>
+  <p>Menerima segala event foto ataupun videografi</p>
+</section>
+
+<section id="about">
+  <h2>Tentang Kami</h2>
+  <p>
+    Kami adalah penyedia layanan fotografi dan videografi
+    yang berdedikasi mengabadikan momen berharga Anda.
+  </p>
+</section>
+
+<section id="gallery">
+  <h2>Galeri</h2>
+  <div class="gallery">
+    <img src="IMG-20250515-WA0040.jpg">
+    <img src="IMG-20250515-WA0041.jpg">
+    <img src="IMG-20250515-WA0042.jpg">
   </div>
+</section>
+
+<section id="paket">
+  <h2>Paket Layanan</h2>
+  <p><strong>Basic</strong> – Foto 2 jam</p>
+  <p><strong>Combo</strong> – Foto + Video cinematic</p>
+</section>
+
+<footer id="contact">
+  <p>
+    <a href="mailto:ziankauman@gmail.com">ziankauman@gmail.com</a> |
+    <a href="https://instagram.com/_ahmdzian" target="_blank">@_ahmdzian</a>
+  </p>
+</footer>
 
 </div>
 
 <script>
-function saveUser(event) {
-  event.preventDefault();
+let isLogin = true;
 
-  const email = document.getElementById("email").value;
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-
-  users.push({
-    email: email,
-    time: new Date().toLocaleString()
-  });
-
-  localStorage.setItem("users", JSON.stringify(users));
-  document.querySelector("form").reset();
-  loadUsers();
+function toggleForm() {
+  isLogin = !isLogin;
+  document.getElementById("formTitle").innerText = isLogin ? "Login" : "Daftar";
+  document.querySelector(".auth-box button").innerText = isLogin ? "Masuk" : "Daftar";
+  document.querySelector(".switch").innerText =
+    isLogin ? "Belum punya akun? Daftar" : "Sudah punya akun? Login";
 }
 
-function loadUsers() {
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const table = document.getElementById("userTable");
-  table.innerHTML = "";
+function submitAuth() {
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
 
-  users.forEach((user, index) => {
-    table.innerHTML += `
-      <tr>
-        <td>${index + 1}</td>
-        <td>${user.email}</td>
-        <td>${user.time}</td>
-        <td><button class="delete-btn" onclick="deleteUser(${index})">Hapus</button></td>
-      </tr>
-    `;
-  });
+  if (!user || !pass) return alert("Isi semua field");
+
+  if (isLogin) {
+    const stored = JSON.parse(localStorage.getItem(user));
+    if (!stored || stored.password !== pass) {
+      return alert("Username atau password salah");
+    }
+  } else {
+    localStorage.setItem(user, JSON.stringify({ password: pass }));
+    alert("Berhasil daftar, silakan login");
+    toggleForm();
+    return;
+  }
+
+  localStorage.setItem("loggedIn", user);
+  showPortfolio();
 }
 
-function deleteUser(index) {
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  users.splice(index, 1);
-  localStorage.setItem("users", JSON.stringify(users));
-  loadUsers();
+function showPortfolio() {
+  document.getElementById("authPage").classList.add("hidden");
+  document.getElementById("portfolioPage").classList.remove("hidden");
 }
 
-loadUsers();
+function logout() {
+  localStorage.removeItem("loggedIn");
+  location.reload();
+}
+
+window.onload = function() {
+  if (localStorage.getItem("loggedIn")) {
+    showPortfolio();
+  }
+}
 </script>
 
 </body>
