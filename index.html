@@ -225,18 +225,28 @@ function toggleForm() {
 }
 
 function submitAuth() {
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
+  const user = document.getElementById("username").value.trim().toLowerCase();
+  const pass = document.getElementById("password").value.trim();
 
-  if (!user || !pass) return alert("Isi semua field");
+  if (!user || !pass) {
+    alert("Isi semua field");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
 
   if (isLogin) {
-    const stored = JSON.parse(localStorage.getItem(user));
-    if (!stored || stored.password !== pass) {
-      return alert("Username atau password salah");
+    if (!users[user] || users[user].password !== pass) {
+      alert("Username atau password salah");
+      return;
     }
   } else {
-    localStorage.setItem(user, JSON.stringify({ password: pass }));
+    if (users[user]) {
+      alert("Username sudah terdaftar");
+      return;
+    }
+    users[user] = { password: pass };
+    localStorage.setItem("users", JSON.stringify(users));
     alert("Berhasil daftar, silakan login");
     toggleForm();
     return;
@@ -247,8 +257,8 @@ function submitAuth() {
 }
 
 function showPortfolio() {
-  document.getElementById("authPage").classList.add("hidden");
-  document.getElementById("portfolioPage").classList.remove("hidden");
+  document.getElementById("authPage").style.display = "none";
+  document.getElementById("portfolioPage").style.display = "block";
 }
 
 function logout() {
@@ -262,6 +272,7 @@ window.onload = function() {
   }
 }
 </script>
+
 
 </body>
 </html>
