@@ -3,209 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fotografi & Videografi</title>
+<title>ahmdzian photography - Login & Gallery</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
+:root {
+  --primary: #3b82f6;
+  --bg-dark: #0f172a;
+  --text-light: #e0f2fe;
+  --accent: #60a5fa;
 }
 
-body{
-    background:#0f0f0f;
-    color:white;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
 }
 
-/* AUTH */
-.container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:url("prt (17).jpg") center/cover no-repeat;
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
 }
 
-.overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
+h2 {
+  text-align: center;
+  color: var(--primary);
 }
 
-.box{
-    position:relative;
-    background:#1a1a1a;
-    padding:40px;
-    width:320px;
-    border-radius:10px;
-    z-index:2;
+.section {
+  margin-bottom: 60px;
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(59,130,246,0.4);
 }
 
-h2{
-    text-align:center;
-    margin-bottom:20px;
-    color:#ffc107;
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
 }
 
-input{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    background:#222;
-    border:none;
-    color:white;
-    border-radius:5px;
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-button{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:none;
-    background:#ffc107;
-    font-weight:bold;
-    cursor:pointer;
-    border-radius:5px;
+button:hover {
+  background: var(--accent);
 }
 
-p.toggle{
-    text-align:center;
-    margin-top:15px;
-    font-size:14px;
-    cursor:pointer;
-    color:#ffc107;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-/* CONTENT */
-#paket{
-    display:none;
-    padding:60px 10%;
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #1e293b;
+  font-size: 14px;
 }
 
-#paket h1{
-    color:#ffc107;
-    margin-bottom:20px;
+th {
+  background: #1e293b;
+  color: var(--primary);
 }
 
-#paket p{
-    margin-bottom:25px;
-    line-height:1.6;
+tr:hover {
+  background: #1e293b;
 }
 
-.gallery{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
+.delete-btn {
+  background: crimson;
 }
 
-.gallery img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:8px;
-    transition:0.3s;
-    cursor:pointer;
+.delete-btn:hover {
+  background: darkred;
 }
 
-.gallery img:hover{
-    transform:scale(1.05);
+/* GALLERY */
+.gallery {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.logout{
-    margin-top:40px;
-    width:200px;
+.gallery img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+  transition: 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.02);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="auth">
-    <div class="overlay"></div>
-    <div class="box">
-        <h2 id="title">Daftar</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="submitForm()">Submit</button>
-        <p class="toggle" onclick="toggleForm()">Sudah punya akun? Login</p>
-    </div>
-</div>
+<div class="container">
 
-<div id="paket">
-    <h1>Fotografi & Videografi – Abadikan Momenmu</h1>
+  <!-- LOGIN -->
+  <div class="section">
+    <h2>Login Pengguna</h2>
+    <form onsubmit="saveUser(event)">
+      <input type="email" id="email" placeholder="Masukkan email" required>
+      <input type="password" placeholder="Masukkan password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
 
-    <p><strong>1. Paket Basic (Foto Saja)</strong><br>
-    - Harga: Rp250.000<br>
-    - Durasi: 2 jam<br>
-    - ±100 foto RAW<br>
-    - 15 foto edit (bebas pilih)<br>
-    - Pengiriman via Google Drive</p>
+  <!-- DATA USER -->
+  <div class="section">
+    <h2>Daftar Pengguna Terdaftar</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Email</th>
+          <th>Waktu Login</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+  </div>
 
-    <p><strong>2. Paket Combo (Foto + Video)</strong><br>
-    - Harga: Rp500.000<br>
-    - Durasi: 2 jam<br>
-    - ±100 foto RAW<br>
-    - 15 foto edit (bebas pilih)</p>
-
-    <h2>Galeri Portofolio</h2>
+  <!-- FOTO TAMBAHAN -->
+  <div class="section">
+    <h2>Portfolio Highlight</h2>
     <div class="gallery">
-        <img src="prt (17).jpg">
-        <img src="prt (13).jpg">
-        <img src="prt (16).jpg">
-        <img src="prt (7).jpg">
-        <img src="prt (15).jpg">
-        <img src="prt (18).jpg">
-        <img src="prt (9).jpg">
-        <img src="prt (14).jpg">
+      <img src="wedding.jpg" alt="Wedding Rasyl Miftah">
     </div>
+  </div>
 
-    <button class="logout" onclick="logout()">Logout</button>
 </div>
 
 <script>
-let isLogin = false;
+function saveUser(event) {
+  event.preventDefault();
 
-function toggleForm(){
-    isLogin = !isLogin;
-    document.getElementById("title").innerText = isLogin ? "Login" : "Daftar";
-    document.querySelector(".toggle").innerText =
-        isLogin ? "Belum punya akun? Daftar" : "Sudah punya akun? Login";
+  const email = document.getElementById("email").value;
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  users.push({
+    email: email,
+    time: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("users", JSON.stringify(users));
+  document.querySelector("form").reset();
+  loadUsers();
 }
 
-function submitForm(){
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+function loadUsers() {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const table = document.getElementById("userTable");
+  table.innerHTML = "";
 
-    if(!user || !pass){
-        alert("Isi semua dulu.");
-        return;
-    }
-
-    if(!isLogin){
-        localStorage.setItem("username", user);
-        localStorage.setItem("password", pass);
-        alert("Berhasil daftar. Sekarang login.");
-        toggleForm();
-    } else {
-        let savedUser = localStorage.getItem("username");
-        let savedPass = localStorage.getItem("password");
-
-        if(user === savedUser && pass === savedPass){
-            document.getElementById("auth").style.display = "none";
-            document.getElementById("paket").style.display = "block";
-        } else {
-            alert("Akun tidak ditemukan. Daftar dulu.");
-        }
-    }
+  users.forEach((user, index) => {
+    table.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${user.email}</td>
+        <td>${user.time}</td>
+        <td><button class="delete-btn" onclick="deleteUser(${index})">Hapus</button></td>
+      </tr>
+    `;
+  });
 }
 
-function logout(){
-    document.getElementById("paket").style.display = "none";
-    document.getElementById("auth").style.display = "flex";
+function deleteUser(index) {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  users.splice(index, 1);
+  localStorage.setItem("users", JSON.stringify(users));
+  loadUsers();
 }
+
+loadUsers();
 </script>
 
 </body>
