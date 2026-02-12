@@ -6,29 +6,46 @@
 <title>Fotografi & Videografi</title>
 
 <style>
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
     font-family:Segoe UI, sans-serif;
-    background:#111;
+}
+
+body{
+    background:#0f0f0f;
     color:white;
 }
 
+/* AUTH */
 .container{
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
+    background:url("prt (17).jpg") center/cover no-repeat;
+}
+
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
 }
 
 .box{
+    position:relative;
     background:#1a1a1a;
     padding:40px;
     width:320px;
     border-radius:10px;
+    z-index:2;
 }
 
 h2{
     text-align:center;
+    margin-bottom:20px;
     color:#ffc107;
 }
 
@@ -55,18 +72,51 @@ button{
 
 p.toggle{
     text-align:center;
+    margin-top:15px;
     font-size:14px;
     cursor:pointer;
     color:#ffc107;
 }
 
+/* CONTENT */
 #paket{
     display:none;
-    padding:40px;
+    padding:60px 10%;
 }
 
 #paket h1{
     color:#ffc107;
+    margin-bottom:20px;
+}
+
+#paket p{
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.gallery{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.gallery img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:8px;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+.logout{
+    margin-top:40px;
+    width:200px;
 }
 </style>
 </head>
@@ -74,6 +124,7 @@ p.toggle{
 <body>
 
 <div class="container" id="auth">
+    <div class="overlay"></div>
     <div class="box">
         <h2 id="title">Daftar</h2>
         <input type="text" id="username" placeholder="Username">
@@ -99,7 +150,19 @@ p.toggle{
     - ±100 foto RAW<br>
     - 15 foto edit (bebas pilih)</p>
 
-    <button onclick="logout()">Logout</button>
+    <h2>Galeri Portofolio</h2>
+    <div class="gallery">
+        <img src="prt (17).jpg">
+        <img src="prt (13).jpg">
+        <img src="prt (16).jpg">
+        <img src="prt (7).jpg">
+        <img src="prt (15).jpg">
+        <img src="prt (18).jpg">
+        <img src="prt (9).jpg">
+        <img src="prt (14).jpg">
+    </div>
+
+    <button class="logout" onclick="logout()">Logout</button>
 </div>
 
 <script>
